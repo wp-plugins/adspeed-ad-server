@@ -1,4 +1,13 @@
-<?php
+<?php 
+/***
+Plugin Name: AdSpeed Ad Server
+Plugin URI: http://www.adspeed.com/
+Description: Serve ads on the sidebar or within any post entry. The ads are hosted and managed at AdSpeed ad server.
+Version: 1.0
+Author: AdSpeed.com
+Author URI: http://www.adspeed.com
+***/
+
  class CAdSpeedPluginForWP { public static function init() { register_sidebar_widget('AdSpeed Ad Server',array('CAdSpeedPluginForWP','renderSidebar')); register_widget_control('AdSpeed Ad Server',array('CAdSpeedPluginForWP','displaySidebarControl')); add_action('admin_menu',array('CAdSpeedPluginForWP','displayAdminMenu')); add_filter('the_content',array('CAdSpeedPluginForWP','replacePostTag')); } public static function displayAdminMenu() { add_options_page( 'options-general.php', 'AdSpeed Ad Server', 8, basename(__FILE__), array('CAdSpeedPluginForWP','displayAdminOptions') ); } public static function displayAdminOptions() { add_option('AdSpeedSettings_Username',''); if (isset($_POST['AdSpeedSettings_Username'])) { update_option('AdSpeedSettings_Username',$_POST['AdSpeedSettings_Username']); } $vOutput = '
 		<div class="wrap">
 			<h2>AdSpeed.com Plugin For WordPress</h2>
