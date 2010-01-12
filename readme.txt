@@ -2,8 +2,8 @@
 Contributors: AdSpeed
 Donate link: http://www.adspeed.com/
 Tags: advertising, ad server, ad manager, adspeed, banner rotation, banner delivery, impression tracking
-Requires at least: 2.7
-Tested up to: 2.7
+Requires at least: 2.9.1
+Tested up to: 2.9.1
 Stable tag: trunk
 
 Serve ads on the sidebar or within a post entry. The ads are hosted and managed at AdSpeed ad server.
@@ -40,3 +40,5 @@ See http://www.adspeed.com/Knowledges/1030/Serving_Code/AdSpeed_Plugin_WordPress
 
 = 1.0 =
 * First release (2009-07-16 15:07:42)
+= 1.1 =
+* Compatible with 2.9.1 (2010-01-12 09:16:40)

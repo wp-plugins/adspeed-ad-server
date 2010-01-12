@@ -1,9 +1,9 @@
 <?php 
 /***
 Plugin Name: AdSpeed Ad Server
-Plugin URI: http://www.adspeed.com/
-Description: Serve ads on the sidebar or within any post entry. The ads are hosted and managed at AdSpeed ad server.
-Version: 1.0
+Plugin URI: http://www.adspeed.com/Knowledges/1030/Serving_Code/AdSpeed_Plugin_WordPress.html
+Description: Display advertising on the sidebar or within any post entry of your blog. The ads are served, managed and tracked for impressions and clicks by AdSpeed ad server.
+Version: 1.1
 Author: AdSpeed.com
 Author URI: http://www.adspeed.com
 ***/
@@ -11,10 +11,13 @@ Author URI: http://www.adspeed.com
  class CAdSpeedPluginForWP { public static function init() { register_sidebar_widget('AdSpeed Ad Server',array('CAdSpeedPluginForWP','renderSidebar')); register_widget_control('AdSpeed Ad Server',array('CAdSpeedPluginForWP','displaySidebarControl')); add_action('admin_menu',array('CAdSpeedPluginForWP','displayAdminMenu')); add_filter('the_content',array('CAdSpeedPluginForWP','replacePostTag')); } public static function displayAdminMenu() { add_options_page( 'options-general.php', 'AdSpeed Ad Server', 8, basename(__FILE__), array('CAdSpeedPluginForWP','displayAdminOptions') ); } public static function displayAdminOptions() { add_option('AdSpeedSettings_Username',''); if (isset($_POST['AdSpeedSettings_Username'])) { update_option('AdSpeedSettings_Username',$_POST['AdSpeedSettings_Username']); } $vOutput = '
 		<div class="wrap">
 			<h2>AdSpeed.com Plugin For WordPress</h2>
-			This plugin displays advertising on the sidebar and inside a blog post. 	
+			This plugin displays advertising on the sidebar and/or inside any blog post.
+			
+			<h3>Requirement</h3>
+			To use this plugin, you need an active account with AdSpeed. Click here to <a href="http://www.adspeed.com/Publishers/register.html">sign up</a>.
 
 			<h3>Ads on the Sidebar</h3>
-			Click on menu Appearance/Widgets and drag <b>AdSpeed Ad Server</b> to the sidebar. You can then choose how many ad placements to be serve on the sidebar. For each ad placement, you need to specify a zone identification. This zone must exist in your AdSpeed account.
+			Click on menu Appearance/Widgets and drag <b>AdSpeed Ad Server</b> to the sidebar. You can then choose how many ad placements to be serve on the sidebar. For each ad placement, you need to specify a zone identification number. This zone must exist in your AdSpeed account.
 
 			<h3>Ads in a Blog Entry</h3>
 			To use it in a post, write this macro <code>{AdSpeed:Zone:1234}</code> (with 1234 to be a zone identification in your AdSpeed account) where you want the ad to display. The macro will be replaced with the serving code for the zone.
@@ -46,7 +49,7 @@ Author URI: http://www.adspeed.com
 				for (i=0;i<vTotal;i++) {
 					var vPlus = i+1;
 					var vValue = typeof(vZoneIDs[i])!="undefined" ? vZoneIDs[i] : "";
-					vBody += "<label for=\"AdSpeedZones["+i+"]\">Placement #"+vPlus+"</label><br/>";
+					vBody += "<label for=\"AdSpeedZones["+i+"]\">Zone ID (numbers only)"+vPlus+"</label><br/>";
 					vBody += "<input type=\"text\" id=\"AdSpeedZones["+i+"]\" name=\"AdSpeedZones["+i+"]\" value=\""+vValue+"\" size=\"10\" /><br/>";					
 				} // rof
 				
