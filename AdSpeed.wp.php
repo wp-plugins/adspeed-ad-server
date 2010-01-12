@@ -49,7 +49,7 @@ Author URI: http://www.adspeed.com
 				for (i=0;i<vTotal;i++) {
 					var vPlus = i+1;
 					var vValue = typeof(vZoneIDs[i])!="undefined" ? vZoneIDs[i] : "";
-					vBody += "<label for=\"AdSpeedZones["+i+"]\">Zone ID (numbers only)"+vPlus+"</label><br/>";
+					vBody += "<label for=\"AdSpeedZones["+i+"]\">Zone ID (numbers only) for placement #"+vPlus+"</label><br/>";
 					vBody += "<input type=\"text\" id=\"AdSpeedZones["+i+"]\" name=\"AdSpeedZones["+i+"]\" value=\""+vValue+"\" size=\"10\" /><br/>";					
 				} // rof
 				
