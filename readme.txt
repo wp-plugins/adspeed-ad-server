@@ -2,17 +2,19 @@
 Contributors: AdSpeed
 Donate link: http://www.adspeed.com/
 Tags: advertising, ad server, ad manager, adspeed, banner rotation, banner delivery, impression tracking
-Requires at least: 2.9.1
+Requires at least: 2.8
 Tested up to: 3.2.1
 Stable tag: trunk
 
-This plugin displays advertising on the sidebar and/or inside any blog post. The ads are hosted and managed at AdSpeed ad server. To use this plugin, you need an active account with AdSpeed Ad Server. To sign up for an ad management account, please visit this page: http://www.adspeed.com/Publishers/register.html
+This plugin displays advertising from your AdSpeed account on the sidebar and/or inside any blog post. Ads are hosted and managed at AdSpeed ad server. 
 
 == Description ==
 
-AdSpeed.com is a hosted ad server and ad manager. You enter your ads and targeting criteria into AdSpeed. We serve ads, track and report real-time statistics about ad impressions, clicks, revenue, and conversions. You manage your ad inventory through our online user-friendly interface. 
+AdSpeed.com is a hosted ad server and ad manager. You enter your ads and targeting criteria into AdSpeed. We serve ads, track and report real-time statistics about ad impressions, clicks, revenue, and conversions. You manage your ad inventory through our online user-friendly interface. Ad styling can be customized via CSS class "AdSpeedWP".
 
-AdSpeed has released a plugin for WordPress, a popular publishing platform. This plugin displays advertising on the sidebar and inside any blog post. A publisher account with AdSpeed is required to manage advertisements. Ad styling can be customized via CSS class "AdSpeedWP".
+Requirements
+------------
+To use this plugin, you need an active account with AdSpeed Ad Server. To sign up for an ad management account, please visit this page: http://www.adspeed.com/Publishers/register.html
 
 Ads on the Sidebar
 ------------------
@@ -24,13 +26,13 @@ To use it in a post, write this macro "{AdSpeed:Zone:1234}" to display a creativ
 
 == Installation ==
 
-1. Download and copy the file AdSpeed.wp.php into folder wp-content/plugins/ of your working WordPress installation.
-2. Sign into the administrator account and activate AdSpeed Ad Server from the menu Plugins.
-3. The plugin is now activated! You can view instructions and settings under menu Settings/AdSpeed Ad Server.
-4. Click on menu Appearance/Widgets and drag AdSpeed Ad Server to the sidebar.
-5. Click to extend the widget and specify how many ad placements you want to display. Fill in the zone ID for each placement and click Save.
-6. For ads within a blog entry, simply compose an entry as usual and write the macro {AdSpeed:Zone:XXX} where you want to serve ads for the zone number XXXX.
-7. Each ad is within a DIV container with CSS class "AdSpeedWP" so that you can apply custom CSS styling to the ad.
+1. Download and copy the file "AdSpeed.wp.php" into folder "wp-content/plugins/" of your working WordPress installation.
+2. Sign into your administrator account and activate "AdSpeed Ad Server" from menu "Plugins".
+3. The AdSpeed plugin is now activated!
+4. Click on menu "Appearance/Widgets" and drag "AdSpeed Ad Server" to the sidebar.
+5. Click to extend the widget box and enter the zone ID number and click "Save".
+6. To display an ad within a blog entry, simply write an entry as usual and write the macro "{AdSpeed:Zone:XXX}" where you want to display ads for the zone number XXX.
+7. Each ad is contained within a DIV container with CSS class "AdSpeedWP" so that you can apply custom CSS styling to the ad.
 
 == Frequently Asked Questions ==
 
