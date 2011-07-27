@@ -1,61 +1,20 @@
 <?php 
-/***
+/*
 Plugin Name: AdSpeed Ad Server
-Plugin URI: http://www.adspeed.com/Knowledges/1030/Serving_Code/AdSpeed_Plugin_WordPress.html
-Description: Display advertising on the sidebar or within any post entry of your blog. The ads are served, managed and tracked for impressions and clicks by AdSpeed ad server.
-Version: 1.1
+Plugin URI: http://www.AdSpeed.com/Knowledges/1030/Serving_Code/AdSpeed_Plugin_WordPress.html
+Description: Displays advertising from your AdSpeed account on the sidebar or within a post. Ads are served, managed and tracked for impressions and clicks by AdSpeed Ad Server. You setup ads inside your AdSpeed account.
+Version: 1.2
 Author: AdSpeed.com
-Author URI: http://www.adspeed.com
-***/
+Author URI: http://www.AdSpeed.com
+Author Email: support@adspeed.com
+License: Copyright 2011 AdSpeed (support@adspeed.com)
+*/
 
- class CAdSpeedPluginForWP { public static function init() { register_sidebar_widget('AdSpeed Ad Server',array('CAdSpeedPluginForWP','renderSidebar')); register_widget_control('AdSpeed Ad Server',array('CAdSpeedPluginForWP','displaySidebarControl')); add_action('admin_menu',array('CAdSpeedPluginForWP','displayAdminMenu')); add_filter('the_content',array('CAdSpeedPluginForWP','replacePostTag')); } public static function displayAdminMenu() { add_options_page( 'options-general.php', 'AdSpeed Ad Server', 8, basename(__FILE__), array('CAdSpeedPluginForWP','displayAdminOptions') ); } public static function displayAdminOptions() { add_option('AdSpeedSettings_Username',''); if (isset($_POST['AdSpeedSettings_Username'])) { update_option('AdSpeedSettings_Username',$_POST['AdSpeedSettings_Username']); } $vOutput = '
-		<div class="wrap">
-			<h2>AdSpeed.com Plugin For WordPress</h2>
-			This plugin displays advertising on the sidebar and/or inside any blog post.
-			
-			<h3>Requirement</h3>
-			To use this plugin, you need an active account with AdSpeed. Click here to <a href="http://www.adspeed.com/Publishers/register.html">sign up</a>.
-
-			<h3>Ads on the Sidebar</h3>
-			Click on menu Appearance/Widgets and drag <b>AdSpeed Ad Server</b> to the sidebar. You can then choose how many ad placements to be serve on the sidebar. For each ad placement, you need to specify a zone identification number. This zone must exist in your AdSpeed account.
-
-			<h3>Ads in a Blog Entry</h3>
-			To use it in a post, write this macro <code>{AdSpeed:Zone:1234}</code> (with 1234 to be a zone identification in your AdSpeed account) where you want the ad to display. The macro will be replaced with the serving code for the zone.
-			
-			<h3>Settings</h3>
-			<form name="AdSpeedSettings" method="post" action="'.$_SERVER['PHP_SELF'].'?page=AdSpeed.wp.php&updated=true">	
-			<table class="form-table">
-			<tr valign="top">
-			<th scope="row">Username</th>
-			<td><input type="text" name="AdSpeedSettings_Username" value="'.get_option('AdSpeedSettings_Username').'" /></td>
-			</tr>
-			</table>
-			<p class="submit"><input type="submit" name="AdSpeedSubmit" class="button-primary" value="Save" /></p>
-			</form>
-		</div>
-		'; echo($vOutput); } public static function renderSidebar() { $vZoneIDs = get_option('AdSpeedSettings_SidebarZoneIDs'); if (!is_array($vZoneIDs)) { return; } $vOutput = ''; foreach ($vZoneIDs AS $vOne) { if (preg_match('/[0-9]+/',$vOne)) { $vOutput .= self::getServingCode($vOne); } } echo $before_widget; echo $before_title; echo $vOutput; echo $after_title; echo $after_widget; } public static function getServingCode($pZoneID) { $vOutput = '<div class="AdSpeedWP">
-		<!-- AdSpeed.com Serving Code 7.9.4 for [Zone] #'.$pZoneID.' [Any Dimension] -->
+ class AdSpeed_Ad_Server extends WP_Widget { public function __construct() { $this->_init_plugin_constants(); $widget_opts = array ( 'classname' => PLUGIN_NAME, 'description' => 'Displays advertising from your AdSpeed account on the sidebar or within a post. Ads are served, managed and tracked for impressions and clicks by AdSpeed Ad Server. You setup ads inside your AdSpeed account.' ); $this->WP_Widget(PLUGIN_SLUG,PLUGIN_NAME,$widget_opts); add_filter('the_content',array($this,'replacePostTag')); $this->_register_scripts_and_styles(); } public static function getServingCode($pZoneID) { $vOutput = '<div class="AdSpeedWP">
+		<!-- AdSpeed.com WP Serving Code 7.9.5 for [Zone] #'.$pZoneID.' [Any Dimension] -->
 		<script type="text/javascript" src="http://g.adspeed.net/ad.php?do=js&zid='.$pZoneID.'&wd=-1&ht=-1&target=_blank&cb='.time().'"></script>
-		<!-- AdSpeed.com End --></div>'; return $vOutput; } public static function replacePostTag($pContent) { if (preg_match_all('/{AdSpeed:Zone:([0-9]+)}/',$pContent,$vMatches)) { foreach ($vMatches[1] AS $vOne) { $pContent = str_replace('{AdSpeed:Zone:'.$vOne.'}',self::getServingCode($vOne),$pContent); } } return $pContent; } public static function displaySidebarControl() { $vZoneIDs = get_option('AdSpeedSettings_SidebarZoneIDs'); if (!is_array($vZoneIDs)) { $vZoneIDs = array(); } if (isset($_POST['AdSpeedSubmit'])) { $vZoneIDs = array(); foreach ($_POST['AdSpeedZones'] AS $vOne) { if (!empty($vOne)) { $vZoneIDs[] = $vOne; } } update_option('AdSpeedSettings_SidebarZoneIDs',$vZoneIDs); } $vOutput = '
-			<script type="text/javascript">
-			var vZoneIDs = ['.implode(',',$vZoneIDs).'];
-			
-			function AS_changeNumZones(pNumZones) {
-				// there are 2 AdSpeedZonesDiv for some reason so cannot use ID (why?)
-				jQuery("div[name=\'AdSpeedZonesDiv\']").html("<h4>Zone ID for each ad placement</h4>"); // reset
-				
-				var vBody = "";
-				var vTotal = typeof(pNumZones)!="undefined" ? pNumZones : vZoneIDs.length;
-				for (i=0;i<vTotal;i++) {
-					var vPlus = i+1;
-					var vValue = typeof(vZoneIDs[i])!="undefined" ? vZoneIDs[i] : "";
-					vBody += "<label for=\"AdSpeedZones["+i+"]\">Zone ID (numbers only) for placement #"+vPlus+"</label><br/>";
-					vBody += "<input type=\"text\" id=\"AdSpeedZones["+i+"]\" name=\"AdSpeedZones["+i+"]\" value=\""+vValue+"\" size=\"10\" /><br/>";					
-				} // rof
-				
-				jQuery("div[name=\'AdSpeedZonesDiv\']").html(vBody);
-			}
-			</script>
-			<label for="AdSpeed_NumZones">Number of ad placements: </label>
-			<select name="AdSpeed_NumZones" id="AdSpeed_NumZones" onchange="AS_changeNumZones(jQuery(this).val());">
-		'; for ($i=0;$i<=10;$i++) { $vOutput .= '<option value="'.$i.'" '.($i==count($vZoneIDs) ? 'selected="selected"' : '').'>'.$i.'</option>'; } $vOutput .= '</select>'; $vOutput .= '<div name="AdSpeedZonesDiv" id="AdSpeedZonesDiv"><h4>Zone ID for each ad placement</h4></div>'; $vOutput .= '<script type="text/javascript">AS_changeNumZones();</script>'; $vOutput .= '<input type="hidden" name="AdSpeedSubmit" id="AdSpeedSubmit" value="true" />'; echo($vOutput); } } add_action('plugins_loaded',array('CAdSpeedPluginForWP','init')); ?>
+		<!-- AdSpeed.com End --></div>'; return $vOutput; } public static function replacePostTag($pContent) { if (preg_match_all('/{AdSpeed:Zone:([0-9]+)}/',$pContent,$vMatches)) { foreach ($vMatches[1] AS $vOne) { $pContent = str_replace('{AdSpeed:Zone:'.$vOne.'}',self::getServingCode($vOne),$pContent); } } return $pContent; } function widget($args, $instance) { extract($args, EXTR_SKIP); echo $before_widget; $AdSpeed_zid = empty($instance['AdSpeed_zid']) ? '' : apply_filters('AdSpeed_zid', $instance['AdSpeed_zid']); echo self::getServingCode($AdSpeed_zid); echo $after_widget; } function update($new_instance, $old_instance) { $instance = $old_instance; $instance['AdSpeed_zid'] = strip_tags(stripslashes($new_instance['AdSpeed_zid'])); return $instance; } function form($instance) { $instance = wp_parse_args( (array)$instance, array( 'AdSpeed_zid' => '', ) ); $AdSpeed_zid = strip_tags(stripslashes($new_instance['AdSpeed_zid'])); $vOutput = '
+		      <label for="AdSpeed_zid">Zone ID</label>
+		      <input type="text" id="'.$this->get_field_id('AdSpeed_zid').'" name="'.$this->get_field_name('AdSpeed_zid').'" value="'.$instance['AdSpeed_zid'].'" /> (number only)
+
+		'; echo($vOutput); } private function _init_plugin_constants() { if(!defined('PLUGIN_LOCALE')) { define('PLUGIN_LOCALE','adspeed-ad-server-locale'); } if(!defined('PLUGIN_NAME')) { define('PLUGIN_NAME','AdSpeed Ad Server'); } if(!defined('PLUGIN_SLUG')) { define('PLUGIN_SLUG','AdSpeed-Ad-Server'); } } private function _register_scripts_and_styles() { } private function _load_file($name, $file_path, $is_script = false) { $url = WP_PLUGIN_URL . $file_path; $file = WP_PLUGIN_DIR . $file_path; if (file_exists($file)) { if($is_script) { wp_register_script($name, $url); wp_enqueue_script($name); } else { wp_register_style($name, $url); wp_enqueue_style($name); } } } } add_action('widgets_init', create_function('', 'register_widget("AdSpeed_Ad_Server");')); ?>
