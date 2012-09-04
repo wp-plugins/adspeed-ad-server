@@ -51,3 +51,5 @@ See http://www.adspeed.com/Knowledges/1030/Serving_Code/AdSpeed_Plugin_WordPress
 = 1.2 =
 * Compatible with 3.2.1 (2011-07-26 14:15:30)
 * Support multiple instances and multiple sidebars
+= 1.2.1 =
+* Compatible with 3.4.1 (2012-09-04 07:06:47)
