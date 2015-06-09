@@ -3,7 +3,7 @@ Contributors: AdSpeed
 Donate link: http://www.adspeed.com/
 Tags: advertising, ad server, ad manager, adspeed, banner rotation, banner delivery, impression tracking
 Requires at least: 2.8
-Tested up to: 4.0
+Tested up to: 4.2.2
 Stable tag: trunk
 
 This plugin displays advertising from your AdSpeed account on the sidebar and/or inside any blog post. Ads are hosted and managed at AdSpeed ad server. 
@@ -22,7 +22,7 @@ Click on menu Appearance/Widgets and drag AdSpeed Ad Server to the sidebar. For 
 
 Ads in a Blog Entry
 -------------------
-To use it in a post, write this macro "{AdSpeed:Zone:1234}" to display a creative from zone ID #1234. In this example, "1234" is a zone identification number in your AdSpeed account. You can find the zone ID from the zone listing. Do NOT use the zone name. This macro will be replaced with the actual serving code for the zone in the post.
+To use it in a post, write this macro "{AdSpeed:Zone:1234}" to display a creative from zone ID# 1234. In this example, "1234" is a zone identification number in your AdSpeed account. You can find the zone ID from the zone listing. Do NOT use the zone name. This macro will be replaced with the actual serving code for the zone in the post.
 
 == Installation ==
 
@@ -31,7 +31,7 @@ To use it in a post, write this macro "{AdSpeed:Zone:1234}" to display a creativ
 3. The AdSpeed plugin is now activated!
 4. Click on menu "Appearance/Widgets" and drag "AdSpeed Ad Server" to the sidebar.
 5. Click to extend the widget box and enter the zone ID number and click "Save".
-6. To display an ad within a blog entry, simply write an entry as usual and write the macro "{AdSpeed:Zone:XXX}" where you want to display ads for the zone number XXX.
+6. To display an ad within a blog entry, simply write an entry as usual and write the macro "{AdSpeed:Zone:1234}" where you want to display ads for the zone ID# 1234. Remember to change 1234 to your own zone ID.
 7. Each ad is contained within a DIV container with CSS class "AdSpeedWP" so that you can apply custom CSS styling to the ad.
 
 == Frequently Asked Questions ==
@@ -57,3 +57,6 @@ See http://www.adspeed.com/Knowledges/1030/Serving_Code/AdSpeed_Plugin_WordPress
 * Compatible with 3.9 (2014-04-28 11:00:49)
 = 1.2.3 =
 * Compatible with 4.0 (2014-09-09 17:40:30)
+= 1.2.4 =
+* Compatible with 4.2.2 (2015-06-09 11:40:44)
+
