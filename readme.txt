@@ -3,7 +3,7 @@ Contributors: AdSpeed
 Donate link: http://www.adspeed.com/
 Tags: advertising, ad server, ad manager, adspeed, banner rotation, banner delivery, impression tracking
 Requires at least: 2.8
-Tested up to: 4.2.2
+Tested up to: 4.3
 Stable tag: trunk
 
 This plugin displays advertising from your AdSpeed account on the sidebar and/or inside any blog post. Ads are hosted and managed at AdSpeed ad server. 
@@ -59,4 +59,6 @@ See http://www.adspeed.com/Knowledges/1030/Serving_Code/AdSpeed_Plugin_WordPress
 * Compatible with 4.0 (2014-09-09 17:40:30)
 = 1.2.4 =
 * Compatible with 4.2.2 (2015-06-09 11:40:44)
+= 1.2.5 =
+* Compatible with 4.3 (2015-09-03 10:51:48)
 

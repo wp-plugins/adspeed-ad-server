@@ -3,7 +3,7 @@
 Plugin Name: AdSpeed Ad Server
 Plugin URI: http://www.AdSpeed.com/Knowledges/1030/Serving_Code/AdSpeed_Plugin_WordPress.html
 Description: Displays advertising from your AdSpeed account on the sidebar or within a post. Ads are served, managed and tracked for impressions and clicks by AdSpeed Ad Server. You setup and manage ads inside your AdSpeed account.
-Version: 1.2.4
+Version: 1.2.5
 Author: AdSpeed.com
 Author URI: http://www.AdSpeed.com
 Author Email: support@adspeed.com
