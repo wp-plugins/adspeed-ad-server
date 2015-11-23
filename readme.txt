@@ -3,7 +3,7 @@ Contributors: AdSpeed
 Donate link: http://www.adspeed.com/
 Tags: advertising, ad server, ad manager, adspeed, banner rotation, banner delivery, impression tracking
 Requires at least: 2.8
-Tested up to: 4.3
+Tested up to: 4.4
 Stable tag: trunk
 
 This plugin displays advertising from your AdSpeed account on the sidebar and/or inside any blog post. Ads are hosted and managed at AdSpeed ad server. 
@@ -22,7 +22,7 @@ Click on menu Appearance/Widgets and drag AdSpeed Ad Server to the sidebar. For 
 
 Ads in a Blog Entry
 -------------------
-To use it in a post, write this macro "{AdSpeed:Zone:1234}" to display a creative from zone ID# 1234. In this example, "1234" is a zone identification number in your AdSpeed account. You can find the zone ID from the zone listing. Do NOT use the zone name. This macro will be replaced with the actual serving code for the zone in the post.
+To use it in a post, write this macro "{AdSpeed:Zone:1234}" to display a creative from zone ID# 1234. In this example, "1234" is a zone identification number in your AdSpeed account. You can find the zone ID from the zone listing. Do NOT use the zone name. This macro will be replaced with the actual ad tag for the zone in the post.
 
 == Installation ==
 
